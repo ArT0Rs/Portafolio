@@ -1,71 +1,91 @@
 :root {
+  --primary-bg: #242424;
+  --text-color: white;
+  --nav-bg: black;
+  --border-color: #15012c;
+  --hover-glow: #ffffff;
+}
+
+/* --- Reseteo Básico y Estilos Globales --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background-color: #242424;
   color: white;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
+/* --- Estilos de Navegación --- */
 .container-nav {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 10vh;
-  background-color: black;
+  min-height: 10vh; /* Usar min-height para más flexibilidad */
+  background-color: var(--nav-bg);
   overflow: hidden;
-  border-bottom: 10px solid #15012c;
-
+  border-bottom: 10px solid var(--border-color);
+  padding: 1rem 0;
 }
 
 .nav-links {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap; /* Permite que los enlaces se ajusten en pantallas pequeñas */
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  height: 100%;
   text-transform: uppercase;
-  
 }
 
 .nav-links a {
   text-decoration: none;
-  color: white;
+  color: var(--text-color);
+  transition: color 0.3s ease, text-shadow 0.3s ease; /* Transición suave */
 }
 
 .nav-links a:hover {
-  color: #ffffff;
-  text-shadow: 0 0 5px #ffffff;
+  color: var(--hover-glow);
+  text-shadow: 0 0 5px var(--hover-glow);
 }
-/* para moviles  */
+
+/* --- Estructura del Layout (Grid) --- */
+
+/* Base para móviles (Mobile-First) */
 .layout_container {
+  display: grid;
+  min-height: 100vh;
   grid-template-columns: 1fr;
   grid-template-areas:
-  "header"
-  "nav"
-  "main"
-  "left"
-  "right"
-  "footer"
+    "header"
+    "nav"
+    "main"
+    "left"
+    "right"
+    "footer";
 }
 
-/* para tablet */
+/* Para Tablets */
 @media (min-width: 768px) {
+  .layout_container {
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas:
+      "header header header"
+      "nav    nav    nav"
+      "left   main   right"
+      "footer footer footer";
+  }
+}
 
-.layout_container{
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas:
-  "header header header"
-  "nav    nav    nav"
-  "left   main   right"
-  "footer footer footer";
-}}
-
-/* para pc */
-
+/* Para PC y pantallas grandes */
+@media (min-width: 1024px) {
+  .layout_container {
+    /* Se puede mantener el layout de tablet o ajustarlo si es necesario */
+    /* Por ejemplo, podríamos hacer las columnas laterales más anchas */
+    grid-template-columns: 1fr 4fr 1fr; /* Main ocupa más espacio */
+  }
+}
