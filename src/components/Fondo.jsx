@@ -36,7 +36,7 @@ const ParticleBackground = () => {
       reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
+        this.size = Math.random() * 1 + 0.2;
         // VELOCIDAD BASE: Aquí controlas qué tan rápido flotan solas
         this.baseSpeedX = (Math.random() - 0.5) * 0.8;
         this.baseSpeedY = (Math.random() - 0.5) * 0.8;
@@ -69,8 +69,8 @@ const ParticleBackground = () => {
           if (distance < radius) {
             // Fuerza de empuje (Repulsión)
             const force = (radius - distance) / radius;
-            const directionX = (dx / distance) * force * 10; // El '10' es la fuerza de escape
-            const directionY = (dy / distance) * force * 10;
+            const directionX = (dx / distance) * force * 2; // El '10' es la fuerza de escape
+            const directionY = (dy / distance) * force * 2;
 
             this.x -= directionX;
             this.y -= directionY;
@@ -88,7 +88,7 @@ const ParticleBackground = () => {
 
     const init = () => {
       particles = [];
-      const quantity = (canvas.width * canvas.height) / 6000;
+      const quantity = (canvas.width * canvas.height) / 4000;
       for (let i = 0; i < quantity; i++) {
         particles.push(new Particle());
       }
@@ -126,7 +126,7 @@ const ParticleBackground = () => {
         top: 0,
         left: 0,
         zIndex: -1,
-        /* background: '#13011f' */
+        background: '#310151ff'
       }}
     />
   );
