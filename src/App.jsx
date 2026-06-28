@@ -7,14 +7,22 @@ function App() {
     <>
     
     <ParticuleBackground />
-    <Navbar />
+
+    <header className="header">
+      <Navbar />
+    </header>
 
     <main className="container">
-      <div className="container-main">
-        <h1 className='container-main-title'>Hola Mundo</h1>
-        <p className='container-main-description'>Desarrollador Web</p>
-      </div>
+
+      <h1>Hola Mundo</h1>
+      <p>Desarrollador Web</p>
+      
+      
     </main>
+
+    <footer className='footer'>
+      <p>Footer</p>
+    </footer>
 
     </>
   )

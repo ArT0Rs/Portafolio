@@ -21,38 +21,6 @@ body {
   color: white;
 }
 
-/* --- Estilos de Navegación --- */
-.container-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 10vh;
-  background-color: var(--nav-bg);
-  overflow: hidden;
-  border-bottom: 10px solid var(--border-color);
-  padding: 1rem 0;
-}
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  text-transform: uppercase;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--text-color);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: var(--hover-glow);
-  text-shadow: 0 0 5px var(--hover-glow);
-}
-
 /* --- Estructura del Layout (Grid) --- */
 
 /* Base para móviles (Mobile-First) */
@@ -79,4 +47,31 @@ body {
       "left   main   right"
       "footer footer footer";
   }
+}
+
+.footer {
+  background-color: var(--nav-bg);
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-top: 10px solid var(--border-color);
+}
+
+/* --- Main --- */
+.container{
+  grid-area: main;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
