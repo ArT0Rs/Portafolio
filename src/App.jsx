@@ -1,23 +1,20 @@
+import Navbar from './components/Navbar'
+import ParticuleBackground from './components/Fondo'
 import './App.css'
 
 function App() {
   return (
     <>
-      <nav className='container-nav'>
-        <div className='nav-links'>
-          <a href="#">Inicio</a>
-          <a href="#">Servicios</a>
-          <a href="#">Proyectos</a>
-          <a href="#">Tecnologias</a>
-          <a href="#">Contacto</a>
-        </div>
-      </nav>
-
-      <main className="container">
-        <h1>Hola Mundo</h1>
-      </main>
     
+    <ParticuleBackground />
+    <Navbar />
 
+    <main className="container">
+      <div className="container-main">
+        <h1 className='container-main-title'>Hola Mundo</h1>
+        <p className='container-main-description'>Desarrollador Web</p>
+      </div>
+    </main>
 
     </>
   )
