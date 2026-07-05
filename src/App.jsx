@@ -16,7 +16,7 @@ function App() {
 
       <h1>Hola Mundo</h1>
       <p>Desarrollador Web</p>
-      
+      <p>En construccion... </p>
       
     </main>
 
