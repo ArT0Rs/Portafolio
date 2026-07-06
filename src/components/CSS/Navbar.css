@@ -33,3 +33,10 @@
   transition: color 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
 }
 
+.nav-links a:hover span {
+  display: inline-block;
+  width: 0%;
+  height: 2px;
+  background-color: var(--hover-glow);
+  transition: width 0.3s ease;
+}
