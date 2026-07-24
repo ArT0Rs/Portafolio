@@ -52,7 +52,7 @@ function App() {
           <div className="hero-avatar-container">
             <div className="hero-avatar-glow"></div>
             <div className="foto-perfil-container">
-              <img src="/jean_avatar.jpg" alt="Jean Luc Goncalvez Cumare" className="foto-perfil" />
+              <img src="./jean_avatar.jpg" alt="Jean Luc Goncalvez Cumare" className="foto-perfil" />
             </div>
           </div>
         </section>
@@ -149,7 +149,7 @@ function App() {
             <div className="wrapper">
               <div className="card">
                 <div className="front-page">
-                  <img src="/412472.jpg" alt="E-commerce Platform" />
+                  <img src="./412472.jpg" alt="E-commerce Platform" />
                   <div className="front-page-content">
                     <h2>E-commerce Platform</h2>
                   </div>
@@ -173,7 +173,7 @@ function App() {
             <div className="wrapper">
               <div className="card">
                 <div className="front-page">
-                  <img src="/412472.jpg" alt="Task Manager" />
+                  <img src="./412472.jpg" alt="Task Manager" />
                   <div className="front-page-content">
                     <h2>Task Manager</h2>
                   </div>
@@ -197,7 +197,7 @@ function App() {
             <div className="wrapper">
               <div className="card">
                 <div className="front-page">
-                  <img src="/412472.jpg" alt="Task Manager" />
+                  <img src="./412472.jpg" alt="Task Manager" />
                   <div className="front-page-content">
                     <h2>Task Manager</h2>
                   </div>
@@ -221,7 +221,7 @@ function App() {
             <div className="wrapper">
               <div className="card">
                 <div className="front-page">
-                  <img src="/412472.jpg" alt="Task Manager" />
+                  <img src="./412472.jpg" alt="Task Manager" />
                   <div className="front-page-content">
                     <h2>Task Manager</h2>
                   </div>
@@ -245,7 +245,7 @@ function App() {
             <div className="wrapper">
               <div className="card">
                 <div className="front-page">
-                  <img src="/412472.jpg" alt="Glassmorphic Portfolio" />
+                  <img src="./412472.jpg" alt="Glassmorphic Portfolio" />
                   <div className="front-page-content">
                     <h2>Glassmorphic Portfolio</h2>
                   </div>
