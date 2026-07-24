@@ -52,7 +52,7 @@ function App() {
           <div className="hero-avatar-container">
             <div className="hero-avatar-glow"></div>
             <div className="foto-perfil-container">
-              <img src="./jean_avatar.jpg" alt="Jean Luc Goncalvez Cumare" className="foto-perfil" />
+              <img src="./jean.jpg" alt="Jean Luc Goncalvez Cumare" className="foto-perfil" />
             </div>
           </div>
         </section>
