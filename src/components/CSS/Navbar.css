@@ -1,42 +1,72 @@
 .container-nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 10vh;
-  background-color: var(--nav-bg);
-  overflow: hidden;
-  border-bottom: 10px solid var(--border-color);
-  padding: 1rem 0;
+  background: rgba(15, 10, 32, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 
 .nav-links {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: 600;
+  gap: 2.5rem;
+  text-transform: capitalize;
+  font-size: 15px;
+  font-weight: 500;
+  width: 100%;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: var(--text-color);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  padding: 0.4rem 0;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6e00ff, #00d4ff);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--hover-glow);
-  text-shadow: 0 0 20px var(--hover-glow);
-  scale: 1.2;
-  transition: color 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
 }
 
-.nav-links a:hover span {
-  display: inline-block;
-  width: 0%;
-  height: 2px;
-  background-color: var(--hover-glow);
-  transition: width 0.3s ease;
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .container-nav {
+    padding: 0.6rem 1rem;
+    width: 95%;
+  }
+  .nav-links {
+    gap: 1.2rem;
+    font-size: 13px;
+  }
 }

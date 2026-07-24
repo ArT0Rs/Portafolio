@@ -1,9 +1,15 @@
 :root {
-  --primary-bg: #242424;
-  --text-color: white;
-  --nav-bg: black;
-  --border-color: #15012c;
-  --hover-glow: #ffffff;
+  --bg-main: #08080a;
+  --bg-gradient: radial-gradient(circle at 50% 50%, #15151e 0%, #040406 100%);
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-hover-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8; /* Gris pizarra elegante y profesional */
+  --accent-purple: #5a189a; /* Tono morado oscuro a juego con la estética de tu foto */
+  --accent-cyan: #b4c6ef; /* Tono plateado/acero para complementar el reloj y el traje */
+  --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  --hover-shadow: 0 20px 40px rgba(90, 24, 154, 0.25);
 }
 
 /* --- Reseteo Básico y Estilos Globales --- */
@@ -15,91 +21,676 @@
   padding: 0;
 }
 
+/* --- COMPORTAMIENTO DE NAVEGACIÓN ---
+   ¿Para qué sirve? Activa la transición de desplazamiento suave al hacer clic en los enlaces internos.
+   ¿Cómo funciona? El navegador se desplaza en lugar de saltar abruptamente a la sección id. */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  /* background-color: #242424; */
-  color: white;
-  padding-bottom: 5rem;
+  background-color: var(--bg-main);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color: var(--text-primary);
+  overflow-x: hidden;
 }
 
-/* --- Estructura del Layout (Grid) --- */
-
-/* Base para móviles (Mobile-First) */
-.layout_container {
-  display: grid;
-  min-height: 100vh;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "header"
-    "nav"
-    "main"
-    "left"
-    "right"
-    "footer";
-}
-
-/* Para Tablets */
-@media (min-width: 768px) {
-  .layout_container {
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-areas:
-      "header header header"
-      "nav    nav    nav"
-      "left   main   right"
-      "footer footer footer";
-  }
-}
-
-.footer {
-  background-color: var(--nav-bg);
-  grid-area: footer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 1rem;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  border-top: 10px solid var(--border-color);
-}
-
-/* --- Main --- */
-.container{
-  grid-area: main;
-  flex-grow: 1;
+#root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  min-height: 100vh;
 }
 
-.void{
+.void {
   position: fixed;
   top: 0; left: 0;
-  height: 5px;
-  background: var(--hover-glow);
-  z-index: 200;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+  z-index: 2000;
   transition: width 0.1s;
 }
 
-.wrapper{
-  perspective: 3000px;
+/* --- Container --- */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 7rem 2rem 4rem;
+  flex-grow: 1;
 }
 
-.card{
+/* --- Headings --- */
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 3.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff 40%, #a0aec0 100%);
+  -webkit-background-clip: text; /* Aplica el degradado de fondo solo al texto (motores Webkit/Blink como Chrome/Safari) */
+  background-clip: text;         /* Propiedad estándar para compatibilidad con todos los navegadores modernos */
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+  border-radius: 2px;
+}
+
+/* --- Secciones --- */
+section {
+  padding: 5rem 0;
+  width: 100%;
+}
+
+/* --- Hero Section (Presentación) --- */
+.hero-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 75vh;
+  gap: 3rem;
+  padding: 3rem 0;
+}
+
+.hero-content {
+  flex: 1.2;
+  text-align: left;
+}
+
+.hero-badge {
+  background: rgba(110, 0, 255, 0.15);
+  border: 1px solid rgba(110, 0, 255, 0.3);
+  color: #c49eff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.hero-content h1 {
+  font-size: 3.8rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ffffff 40%, #00d4ff 100%);
+  -webkit-background-clip: text; /* Aplica el degradado de fondo al texto */
+  background-clip: text;         /* Propiedad estándar por compatibilidad */
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.hero-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.hero-avatar-container {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-avatar-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(90, 24, 154, 0.35) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(25px);
+  animation: pulse 4s infinite alternate;
+}
+
+/* 1. EL CONTENEDOR (El marco de tu foto) */
+.foto-perfil-container {
+  /* PASO 1: Dimensiones y forma del marco */
+  
+  /* ¿Para qué sirve? Define el tamaño del marco en el que se meterá la foto. */
+  width: 300px;  /* Ejemplo de tamaño. ¡Ajusta este valor! */
+  height: 300px; /* Para hacerlo cuadrado, o ajusta si es rectangular. */
+  
+  /* ¿Cómo funciona? Crea el espacio visible de la foto en la página. */
+  
+  border-radius: 20px; /* Coincide con el borde redondeado de tu imagen */
+  
+  /* ¡CLAVE! ¿Para qué sirve? Oculta el exceso de la foto que no entra en el marco. */
+  overflow: hidden; 
+  /* ¿Cómo funciona? Todo lo que se salga de este marco (como la parte inferior de la foto si es muy larga) será invisible. */
+  
+  /* Opcionales para tu estética oscura */
+  border: 2px solid var(--accent-purple); /* Un borde morado como en la imagen, para visual */
+  box-shadow: var(--card-shadow); /* Sombra para profundidad */
+  display: flex; /* Para centrar la imagen internamente si usas porcentajes */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. LA FOTO (La imagen de la persona) */
+.foto-perfil-container img.foto-perfil {
+  /* PASO 2: Cómo se ajusta la foto al marco */
+  
+  /* ¿Para qué sirve? Obliga a la foto a ocupar todo el espacio del contenedor. */
+  width: 100%; 
+  height: 100%; 
+  /* ¿Cómo funciona? Estira la imagen para llenar el contenedor. */
+  
+  /* ¡CLAVE ABSOLUTA! object-fit */
+  /* ¿Para qué sirve? Dice a la imagen que se estire para *cubrir* todo el contenedor, manteniendo su relación de aspecto, pero *sin* distorsionarse. */
+  object-fit: cover; 
+  /* ¿Cómo funciona? El navegador escala la imagen para llenar el contenedor. Al hacerlo, el exceso de la imagen (donde está el recorte de cabeza) se ocultará gracias al `overflow: hidden` del contenedor. */
+  
+  /* Control de RECORTE (Solución al problema) */
+  /* ¿Para qué sirve? Controla *dónde* se recorta la imagen cuando `object-fit: cover` está activo. Por defecto, recorta desde el centro. */
+  object-position: 0% 25%; 
+  /* ¿Cómo funciona? Con esto le decimos: "Alinea la imagen por el centro horizontal y, muy importante, por la parte superior vertical". Esto prioriza que la cabeza se muestre completa y el recorte sea en la parte inferior de la foto, donde hay menos información crítica. */
+  
+  /* Opcionales */
+  display: block; /* Elimina espacios de línea base */
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-avatar-container:hover .foto-perfil-container {
+  transform: translateY(-5px);
+}
+
+.foto-perfil-container:hover img.foto-perfil {
+  transform: scale(1.06); /* Zoom sutil en hover */
+}
+
+/* --- Servicios --- */
+/* --- GRID DE SERVICIOS (Alineación Horizontal) ---
+   ¿Para qué sirve? Coloca las tarjetas de servicios de forma horizontal y responsiva.
+   ¿Cómo funciona? Con 'flex-wrap: wrap' y 'flex-direction: row' se adaptan a varias líneas si no caben. */
+.services-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+/* --- EFECTO DE DESENFOQUE (Hover Blur) ---
+   ¿Para qué sirve? Resalta la tarjeta activa desenfocando y bajando la opacidad de las demás.
+   ¿Cómo funciona? ':has()' detecta que hay una tarjeta con hover y ':not(:hover)' selecciona y modifica las tarjetas inactivas. */
+.services-grid:has(.service-card:hover) .service-card:not(:hover) {
+  filter: blur(3px);
+  opacity: 0.75;
+}
+
+.service-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem 2.2rem;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row; /* Contenido horizontal */
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex: 1 1 380px; /* Flexibilidad horizontal */
+  max-width: 520px;
+}
+
+.service-card:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.15);
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text; /* Aplica el degradado de fondo al texto del icono */
+  background-clip: text;         /* Propiedad estándar por compatibilidad */
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.service-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.service-card p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- Tecnologías (Habilidades) --- */
+.tech-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.tech-badge {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  flex-direction: row; /* Elemento horizontal: icono + nombre */
+  align-items: center;
+  gap: 0.8rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tech-badge:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 212, 255, 0.12);
+}
+
+.tech-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.tech-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+/* --- PROYECTOS (Galería Horizontal) ---
+   ¿Para qué sirve? Contenedor flexible de las tarjetas del portafolio.
+   ¿Cómo funciona? Organiza los wrappers de las tarjetas horizontalmente. */
+.gallery-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+/* --- DESENFOQUE DE GALERÍA (Hover Blur) ---
+   ¿Para qué sirve? Desenfoca sutilmente las tarjetas de proyecto vecinas al interactuar con una. */
+.gallery-container:has(.wrapper:hover) .wrapper:not(:hover) {
+  filter: blur(3px);
+  opacity: 0.7;
+}
+
+/* --- EL ENVOLTORIO / MINIATURA (El detector del cursor) ---
+   ¿Para qué sirve? Es el área fija que activa el hover y da la profundidad 3D.
+   ¿Cómo funciona? 'perspective: 1000px' crea el espacio de visualización tridimensional en la pantalla. */
+.wrapper {
+  perspective: 1000px;
+  width: 136px;
+  height: 200px;
+  position: relative;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+  z-index: 1;
+  margin: 1.5rem 0.5rem;
+}
+
+.wrapper:hover {
+  z-index: 10;
+}
+
+/* --- LA TARJETA 3D REAL (Soporte y Escala) ---
+   ¿Para qué sirve? Es la tarjeta que contiene la imagen frontal y la información trasera.
+   ¿Cómo funciona? Mide 360x520px pero se escala a 0.38 para encajar en el wrapper sin distorsionarse.
+   'transform-style: preserve-3d' habilita la visualización de la cara frontal y trasera. */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 360px;
-  height: 530px;
+  height: 520px;
   transform-style: preserve-3d;
-  transition: transform 0.6s ease-in-out;
+  transform: translate(-50%, -50%) scale(0.38);
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
-  border: 1px solid #ccc;
-  box-shadow: 5px 5px 10px rgb(0, 0, 0, 0.2), -5px -5px 10px rgb(0, 0, 0, 0.2);
 }
 
-.card:hover{
-  transform: transla
+/* --- ANIMACIÓN DE GIRO Y ZOOM (Hover) ---
+   ¿Para qué sirve? Agranda la tarjeta al 68% y la gira 180 grados sobre el eje Y al pasar el cursor. */
+.wrapper:hover .card {
+  transform: translate(-50%, -50%) scale(0.68) rotateY(180deg);
+}
+
+.front-page, .back-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--glass-border);
+}
+
+.front-page {
+  background-color: #0b0715;
+  z-index: 2;
+}
+
+.front-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.75;
+  transition: opacity 0.3s, transform 0.5s;
+}
+
+.wrapper:hover .front-page img {
+  opacity: 0.95;
+  transform: scale(1.05);
+}
+
+.front-page-content {
+  margin-top: auto;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(10, 7, 21, 0.95), transparent);
+  text-align: left;
+}
+
+.front-page-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.back-page {
+  background: rgba(18, 11, 36, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: rotateY(180deg);
+  padding: 2.5rem 2rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.8rem;
+}
+
+.card-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+}
+
+.card-button {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-cyan) 100%);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(110, 0, 255, 0.3);
+}
+
+.card-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* --- Contacto --- */
+.contact-container {
+  max-width: 580px;
+  margin: 1rem auto 0;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 3rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--card-shadow);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.contact-submit {
+  margin-top: 1rem;
+  align-self: center;
+}
+
+/* --- Botones --- */
+.btn-habilidades {
+  display: inline-block;
+  padding: 12px 32px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-cyan) 100%);
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(110, 0, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+}
+
+.btn-habilidades:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+  filter: brightness(1.1);
+}
+
+.btn-habilidades:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* --- Footer --- */
+.footer {
+  background: rgba(6, 4, 14, 0.95);
+  border-top: 1px solid var(--glass-border);
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-cyan);
+}
+
+/* --- Animaciones --- */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.35; }
+  100% { transform: scale(1.04); opacity: 0.55; }
+}
+
+/* --- Media Queries --- */
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    min-height: auto;
+  }
+  .hero-content {
+    text-align: center;
+  }
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .foto-perfil-container, .hero-avatar-glow {
+    width: 240px;
+    height: 240px;
+  }
+  section {
+    padding: 3.5rem 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 6rem 1.2rem 2rem;
+  }
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-name {
+    font-size: 1.4rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+  .hero-buttons .btn-habilidades {
+    width: 100%;
+  }
+  .contact-container {
+    padding: 2rem 1.2rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
 }
