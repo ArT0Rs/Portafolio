@@ -21,9 +21,7 @@
   padding: 0;
 }
 
-/* --- COMPORTAMIENTO DE NAVEGACIÓN ---
-   ¿Para qué sirve? Activa la transición de desplazamiento suave al hacer clic en los enlaces internos.
-   ¿Cómo funciona? El navegador se desplaza en lugar de saltar abruptamente a la sección id. */
+/* Navegación con desplazamiento suave */
 html {
   scroll-behavior: smooth;
 }
@@ -57,7 +55,7 @@ body {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 7rem 2rem 4rem;
+  padding: 0 2rem;
   flex-grow: 1;
 }
 
@@ -88,20 +86,31 @@ body {
 }
 
 /* --- Secciones --- */
+/* Estilo base de secciones para flujo normal (móviles o zoom alto) */
 section {
-  padding: 5rem 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 0 3rem 0; /* Padding moderado para evitar separaciones gigantes en zoom */
+  box-sizing: border-box;
+}
+
+/* Pantalla completa (100vh) habilitada solo en resoluciones amplias y sin zoom excesivo */
+@media (min-height: 680px) and (min-width: 900px) {
+  section {
+    min-height: 100vh;
+    padding: 7rem 0 3rem 0; /* Mayor espacio superior para librar el menú flotante */
+  }
 }
 
 /* --- Hero Section (Presentación) --- */
 .hero-section {
-  display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  min-height: 75vh;
+  align-items: center;
   gap: 3rem;
-  padding: 3rem 0;
 }
 
 .hero-content {
@@ -173,53 +182,28 @@ section {
   animation: pulse 4s infinite alternate;
 }
 
-/* 1. EL CONTENEDOR (El marco de tu foto) */
+/* Marco/Contenedor cuadrado de la foto de perfil */
 .foto-perfil-container {
-  /* PASO 1: Dimensiones y forma del marco */
-  
-  /* ¿Para qué sirve? Define el tamaño del marco en el que se meterá la foto. */
-  width: 300px;  /* Ejemplo de tamaño. ¡Ajusta este valor! */
-  height: 300px; /* Para hacerlo cuadrado, o ajusta si es rectangular. */
-  
-  /* ¿Cómo funciona? Crea el espacio visible de la foto en la página. */
-  
-  border-radius: 20px; /* Coincide con el borde redondeado de tu imagen */
-  
-  /* ¡CLAVE! ¿Para qué sirve? Oculta el exceso de la foto que no entra en el marco. */
-  overflow: hidden; 
-  /* ¿Cómo funciona? Todo lo que se salga de este marco (como la parte inferior de la foto si es muy larga) será invisible. */
-  
-  /* Opcionales para tu estética oscura */
-  border: 2px solid var(--accent-purple); /* Un borde morado como en la imagen, para visual */
-  box-shadow: var(--card-shadow); /* Sombra para profundidad */
-  display: flex; /* Para centrar la imagen internamente si usas porcentajes */
+  width: 300px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden; /* Oculta partes de la foto que salgan del marco */
+  border: 2px solid var(--accent-purple);
+  box-shadow: var(--card-shadow);
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. LA FOTO (La imagen de la persona) */
+/* Imagen de perfil ajustada al marco sin distorsión */
 .foto-perfil-container img.foto-perfil {
-  /* PASO 2: Cómo se ajusta la foto al marco */
-  
-  /* ¿Para qué sirve? Obliga a la foto a ocupar todo el espacio del contenedor. */
-  width: 100%; 
-  height: 100%; 
-  /* ¿Cómo funciona? Estira la imagen para llenar el contenedor. */
-  
-  /* ¡CLAVE ABSOLUTA! object-fit */
-  /* ¿Para qué sirve? Dice a la imagen que se estire para *cubrir* todo el contenedor, manteniendo su relación de aspecto, pero *sin* distorsionarse. */
-  object-fit: cover; 
-  /* ¿Cómo funciona? El navegador escala la imagen para llenar el contenedor. Al hacerlo, el exceso de la imagen (donde está el recorte de cabeza) se ocultará gracias al `overflow: hidden` del contenedor. */
-  
-  /* Control de RECORTE (Solución al problema) */
-  /* ¿Para qué sirve? Controla *dónde* se recorta la imagen cuando `object-fit: cover` está activo. Por defecto, recorta desde el centro. */
-  object-position: 0% 25%; 
-  /* ¿Cómo funciona? Con esto le decimos: "Alinea la imagen por el centro horizontal y, muy importante, por la parte superior vertical". Esto prioriza que la cabeza se muestre completa y el recorte sea en la parte inferior de la foto, donde hay menos información crítica. */
-  
-  /* Opcionales */
-  display: block; /* Elimina espacios de línea base */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Escala y rellena sin deformar */
+  object-position: 0% 25%; /* Ajusta el encuadre vertical para evitar recortes de cabeza */
+  display: block;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -232,9 +216,7 @@ section {
 }
 
 /* --- Servicios --- */
-/* --- GRID DE SERVICIOS (Alineación Horizontal) ---
-   ¿Para qué sirve? Coloca las tarjetas de servicios de forma horizontal y responsiva.
-   ¿Cómo funciona? Con 'flex-wrap: wrap' y 'flex-direction: row' se adaptan a varias líneas si no caben. */
+/* Grid horizontal y flexible de servicios */
 .services-grid {
   display: flex;
   flex-direction: row;
@@ -245,9 +227,7 @@ section {
   margin-top: 1rem;
 }
 
-/* --- EFECTO DE DESENFOQUE (Hover Blur) ---
-   ¿Para qué sirve? Resalta la tarjeta activa desenfocando y bajando la opacidad de las demás.
-   ¿Cómo funciona? ':has()' detecta que hay una tarjeta con hover y ':not(:hover)' selecciona y modifica las tarjetas inactivas. */
+/* Desenfoque en cascada: resalta la tarjeta de servicio activa y difumina las inactivas */
 .services-grid:has(.service-card:hover) .service-card:not(:hover) {
   filter: blur(3px);
   opacity: 0.75;
@@ -307,6 +287,21 @@ section {
 }
 
 /* --- Tecnologías (Habilidades) --- */
+.tech-category {
+  margin-bottom: 2.5rem;
+}
+
+.tech-category-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 1.2rem;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+
 .tech-grid {
   display: flex;
   flex-direction: row;
@@ -349,30 +344,25 @@ section {
   color: #e2e8f0;
 }
 
-/* --- PROYECTOS (Galería Horizontal) ---
-   ¿Para qué sirve? Contenedor flexible de las tarjetas del portafolio.
-   ¿Cómo funciona? Organiza los wrappers de las tarjetas horizontalmente. */
+/* Contenedor flexible de la galería de proyectos */
 .gallery-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 3rem;
   justify-content: center;
   align-items: center;
-  padding: 2rem 0;
+  padding: 1rem 0 0 0;
   width: 100%;
 }
 
-/* --- DESENFOQUE DE GALERÍA (Hover Blur) ---
-   ¿Para qué sirve? Desenfoca sutilmente las tarjetas de proyecto vecinas al interactuar con una. */
+/* Desenfoque en hover para las tarjetas de proyectos inactivas */
 .gallery-container:has(.wrapper:hover) .wrapper:not(:hover) {
   filter: blur(3px);
   opacity: 0.7;
 }
 
-/* --- EL ENVOLTORIO / MINIATURA (El detector del cursor) ---
-   ¿Para qué sirve? Es el área fija que activa el hover y da la profundidad 3D.
-   ¿Cómo funciona? 'perspective: 1000px' crea el espacio de visualización tridimensional en la pantalla. */
+/* Miniatura/Wrapper: área interactiva que define el tamaño base y activa el 3D */
 .wrapper {
   perspective: 1000px;
   width: 136px;
@@ -380,17 +370,14 @@ section {
   position: relative;
   transition: filter 0.4s ease, opacity 0.4s ease;
   z-index: 1;
-  margin: 1.5rem 0.5rem;
+  margin: 0.5rem;
 }
 
 .wrapper:hover {
   z-index: 10;
 }
 
-/* --- LA TARJETA 3D REAL (Soporte y Escala) ---
-   ¿Para qué sirve? Es la tarjeta que contiene la imagen frontal y la información trasera.
-   ¿Cómo funciona? Mide 360x520px pero se escala a 0.38 para encajar en el wrapper sin distorsionarse.
-   'transform-style: preserve-3d' habilita la visualización de la cara frontal y trasera. */
+/* Tarjeta 3D real: tamaño original 360x520px escalado a 0.38 */
 .card {
   position: absolute;
   top: 50%;
@@ -403,8 +390,7 @@ section {
   cursor: pointer;
 }
 
-/* --- ANIMACIÓN DE GIRO Y ZOOM (Hover) ---
-   ¿Para qué sirve? Agranda la tarjeta al 68% y la gira 180 grados sobre el eje Y al pasar el cursor. */
+/* Efecto hover: agranda al 68% y gira 180 grados en Y */
 .wrapper:hover .card {
   transform: translate(-50%, -50%) scale(0.68) rotateY(180deg);
 }
@@ -522,61 +508,77 @@ section {
 }
 
 /* --- Contacto --- */
+
+/* Contenedor del formulario: centrado, con efecto de vidrio esmerilado y ancho máximo de 620px */
 .contact-container {
-  max-width: 580px;
-  margin: 1rem auto 0;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  padding: 3rem;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--card-shadow);
+  max-width: 620px; /* Ancho máximo ajustado para visualización equilibrada */
+  width: 100%; /* Permite adaptabilidad en pantallas móviles */
+  margin: 0.5rem auto 0; /* Centrado horizontal y margen superior */
+  background: var(--glass-bg); /* Fondo semi-transparente */
+  border: 1px solid var(--glass-border); /* Borde sutil del marco */
+  border-radius: 24px; /* Bordes redondeados del contenedor */
+  padding: 3rem; /* Espaciado interno generoso */
+  backdrop-filter: blur(12px); /* Desenfoque del fondo detrás del vidrio */
+  -webkit-backdrop-filter: blur(12px); /* Compatibilidad de desenfoque para Safari */
+  box-shadow: var(--card-shadow); /* Sombra para dar efecto de profundidad */
+  box-sizing: border-box; /* Asegura que el padding no altere el ancho total */
 }
 
+/* Formulario: organiza los campos en columna con espaciado constante */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  text-align: left;
+  gap: 1.5rem; /* Separación vertical entre campos del formulario */
+  text-align: left; /* Alinea los textos a la izquierda */
 }
 
+/* Grupo de campo: contenedor del label y el input correspondiente */
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.5rem; /* Distancia entre la etiqueta y el cuadro de texto */
 }
 
+/* Etiquetas de los campos */
 .form-group label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-secondary); /* Color gris pizarra */
   letter-spacing: 0.5px;
 }
 
+/* Entradas de texto e inputs: fondo oscuro muy transparente y bordes suaves */
 .form-group input,
 .form-group textarea {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 0.8rem 1.2rem;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.02); /* Fondo sutilmente visible */
+  border: 1px solid var(--glass-border); /* Borde fino translúcido */
+  border-radius: 12px; /* Redondeado suave de las esquinas */
+  padding: 0.8rem 1.2rem; /* Espacio para escribir cómodamente */
+  color: #fff; /* Texto de escritura color blanco */
   font-size: 14px;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Transiciones suaves en interacciones */
 }
 
+/* Altura mínima específica para el campo de Mensaje */
+.form-group textarea {
+  min-height: 120px; /* Tamaño del campo de mensaje */
+  resize: vertical; /* Permite al usuario estirarlo solo verticalmente */
+}
+
+/* Efecto de foco cuando el usuario hace clic para escribir */
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-cyan); /* Borde cambia al tono plata-acero */
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15); /* Brillo celeste sutil alrededor */
+  background: rgba(255, 255, 255, 0.05); /* Fondo se aclara levemente */
 }
 
+/* Centrado horizontal del botón de enviar */
 .contact-submit {
   margin-top: 1rem;
-  align-self: center;
+  align-self: center; /* Centra el botón dentro de la columna flex */
 }
 
 /* --- Botones --- */

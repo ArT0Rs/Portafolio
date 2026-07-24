@@ -95,38 +95,48 @@ function App() {
         {/* --- Sección de Tecnologías --- */}
         <section id="Tecnologias">
           <h2 className="section-title">Tecnologías</h2>
-          <div className="tech-grid">
-            <div className="tech-badge">
-              <div className="tech-icon">⚛️</div>
-              <span className="tech-name">React</span>
+          
+          <div className="tech-category">
+            <h3 className="tech-category-title">Stack Principal / Especialidad</h3>
+            <div className="tech-grid">
+              <div className="tech-badge">
+                <div className="tech-icon">⚛️</div>
+                <span className="tech-name">React</span>
+              </div>
+              <div className="tech-badge">
+                <div className="tech-icon">🟨</div>
+                <span className="tech-name">JavaScript</span>
+              </div>
+              <div className="tech-badge">
+                <div className="tech-icon">🎨</div>
+                <span className="tech-name">CSS3</span>
+              </div>
+              <div className="tech-badge">
+                <div className="tech-icon">📄</div>
+                <span className="tech-name">HTML5</span>
+              </div>
+              <div className="tech-badge">
+                <div className="tech-icon">🐙</div>
+                <span className="tech-name">Git</span>
+              </div>
             </div>
-            <div className="tech-badge">
-              <div className="tech-icon">🟢</div>
-              <span className="tech-name">Node.js</span>
-            </div>
-            <div className="tech-badge">
-              <div className="tech-icon">🟨</div>
-              <span className="tech-name">JavaScript</span>
-            </div>
-            <div className="tech-badge">
-              <div className="tech-icon">🎨</div>
-              <span className="tech-name">CSS3</span>
-            </div>
-            <div className="tech-badge">
-              <div className="tech-icon">📄</div>
-              <span className="tech-name">HTML5</span>
-            </div>
-            <div className="tech-badge">
-              <div className="tech-icon">🛢️</div>
-              <span className="tech-name">SQL</span>
-            </div>
-            <div className="tech-badge">
-              <div className="tech-icon">🐙</div>
-              <span className="tech-name">Git</span>
-            </div>
-            <div className="tech-badge">
-              <div className="tech-icon">🐍</div>
-              <span className="tech-name">Python</span>
+          </div>
+
+          <div className="tech-category">
+            <h3 className="tech-category-title">Desarrollo de Software & Backend</h3>
+            <div className="tech-grid">
+              <div className="tech-badge">
+                <div className="tech-icon">🟢</div>
+                <span className="tech-name">Node.js</span>
+              </div>
+              <div className="tech-badge">
+                <div className="tech-icon">🛢️</div>
+                <span className="tech-name">SQL</span>
+              </div>
+              <div className="tech-badge">
+                <div className="tech-icon">🐍</div>
+                <span className="tech-name">Python</span>
+              </div>
             </div>
           </div>
         </section>
@@ -154,6 +164,54 @@ function App() {
                     <span className="card-tag">Node.js</span>
                     <span className="card-tag">Express</span>
                     <span className="card-tag">SQL</span>
+                  </div>
+                  <button className="card-button" onClick={() => window.open("#", "_blank")}>Ver Proyecto</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="wrapper">
+              <div className="card">
+                <div className="front-page">
+                  <img src="/412472.jpg" alt="Task Manager" />
+                  <div className="front-page-content">
+                    <h2>Task Manager</h2>
+                  </div>
+                </div>
+                <div className="back-page">
+                  <h3 className="card-title">Task Manager</h3>
+                  <p className="card-description">
+                    Gestor de tareas colaborativo con tableros estilo Kanban en tiempo real, notificaciones push y asignación automatizada de metas.
+                  </p>
+                  <div className="card-tags">
+                    <span className="card-tag">React</span>
+                    <span className="card-tag">Socket.io</span>
+                    <span className="card-tag">PostgreSQL</span>
+                    <span className="card-tag">Tailwind</span>
+                  </div>
+                  <button className="card-button" onClick={() => window.open("#", "_blank")}>Ver Proyecto</button>
+                </div>
+              </div>
+            </div>
+            
+            <div className="wrapper">
+              <div className="card">
+                <div className="front-page">
+                  <img src="/412472.jpg" alt="Task Manager" />
+                  <div className="front-page-content">
+                    <h2>Task Manager</h2>
+                  </div>
+                </div>
+                <div className="back-page">
+                  <h3 className="card-title">Task Manager</h3>
+                  <p className="card-description">
+                    Gestor de tareas colaborativo con tableros estilo Kanban en tiempo real, notificaciones push y asignación automatizada de metas.
+                  </p>
+                  <div className="card-tags">
+                    <span className="card-tag">React</span>
+                    <span className="card-tag">Socket.io</span>
+                    <span className="card-tag">PostgreSQL</span>
+                    <span className="card-tag">Tailwind</span>
                   </div>
                   <button className="card-button" onClick={() => window.open("#", "_blank")}>Ver Proyecto</button>
                 </div>
@@ -237,8 +295,8 @@ function App() {
         <div className="footer-links">
           <a href="#Inicio">Inicio</a>
           <a href="#Servicios">Servicios</a>
-          <a href="#Proyectos">Proyectos</a>
           <a href="#Tecnologias">Tecnologías</a>
+          <a href="#Proyectos">Proyectos</a>
           <a href="#Contacto">Contacto</a>
         </div>
         <p>&copy; {new Date().getFullYear()} Jean Luc Goncalvez Cumare. Todos los derechos reservados.</p>
